@@ -1,0 +1,14 @@
+##################################################################
+## Author:    Jia Ruipeng (Chiness)
+##################################################################
+echo "正在初始化配置......"
+if [ ! -e $HOME/.emacs.d ];then mkdir -p $HOME/.emacs.d;fi
+
+curdir=`pwd`
+curdirname=${curdir##*/}
+# cp $curdir/emacs ~/.emacs
+cp -r $curdir/emacsd/* ~/.emacs.d/
+# cp $curdir/ftplugin ~/.vim -r
+
+echo "初始化配置结束....."
+

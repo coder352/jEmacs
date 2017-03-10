@@ -47,7 +47,7 @@
 (load "theme")
 (load "others")
 
-; (load "bundles")
+(load "bundles")
 (load "cpp")
 (load "python")
 (load "php")

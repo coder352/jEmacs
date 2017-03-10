@@ -1,66 +1,43 @@
 ;==========================================
 ; Plug 配置
 ;==========================================
-;; 简单来说就是成堆成堆的 (require 'something)
-(defun require-extensions (action lst)  ;; 函数讲解见: ./keymap.el
-  ""
-  (mapcar (lambda(ext) "" (funcall action ext)) lst))
-(require-extensions
-  'require
-  (list
-    ; 'tabbar
-    ; 'switch-window
-    ; 'thing-edit
-    ; 'second-sel
-    ; 'browse-kill-ring+
-    ; 'bbdb
-    ; 'gnuplot
-    ; 'muse-mode
-    ; 'ibuffer
-    ; 'w3m-load
-    ; 'rect-mark
-    ; 'ido
-    ; 'multi-term
-    ; 'lusty-explorer
-    ; 'oddmuse
-    ; 'emaci
-    ; 'move-text
-    ; 'uniquify
-    ; 'hide-region
-    ))
-
-;;""""""""""
 (when (>= emacs-major-version 24)
-    (require 'package)
-    (package-initialize)
+    (require 'package)  ;; 默认的源是 ELPA, 所以用这几行修改源
     (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t))
+(package-initialize)  ;; 这句话是加载安装的插件
 
+;================================================================
+; 安装插件
+;================================================================
 ;; cl - Common Lisp Extension
+;; loop for ... in, 它来自 cl 即 Common Lisp 扩展.
+;; for, in, collect 均为 cl-loop 中的保留关键字
 (require 'cl)
 
 ;; Add Packages
 (defvar my/packages '(
-	       ;; --- Auto-completion ---
-	       company
-	       ;; --- Better Editor ---
-	       hungry-delete
-	       swiper
-	       counsel
-	       smartparens
-	       ;; --- Major Mode ---
-	       js2-mode
-	       ;; --- Minor Mode ---
-	       nodejs-repl
-	       exec-path-from-shell
-	       ;; --- Themes ---
-	       monokai-theme
-	       ;; solarized-theme
-	       ) "Default packages")
+    better-defaults  ;; 集合了一系列对Emacs默认配置的修改，为我们开始进一步自定义奠定了良好的基础
+    material-theme  ;; 供了一组自定义的样式
+	;; --- Auto-completion ---
+	company
+	;; --- Better Editor ---
+	hungry-delete
+	swiper
+	counsel
+	smartparens
+	;; --- Major Mode ---
+	js2-mode
+	;; --- Minor Mode ---
+	nodejs-repl
+	exec-path-from-shell
+	;; --- Themes ---
+	monokai-theme
+	;; solarized-theme
+	) "Default packages")
 
+;; (load-theme 'material t)  ;; load material theme
 (setq package-selected-packages my/packages)
 
-;; loop for ... in, 它来自 cl 即 Common Lisp 扩展.
-;; for, in, collect 均为 cl-loop 中的保留关键字
 (defun my/packages-installed-p ()
     (loop for pkg in my/packages
 	  when (not (package-installed-p pkg)) do (return nil)

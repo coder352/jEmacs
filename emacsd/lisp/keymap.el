@@ -1,7 +1,8 @@
 ;==========================================
 ; Keymap 键盘快捷键映射
 ;==========================================
-(global-set-key (kbd "<f2>") (load-file "~/.emacs.d/init.el"))
+;; 下面这句话会再次引入 .emacs.d/init.el, 报错
+;; (global-set-key (kbd "<f2>") (load-file "~/.emacs.d/init.el"))
 
 ;; 通常我们定义 key einding 的时候都是使用 (global-set-key (kbd "C-c x) 'some-function)
 ;; 问题是 global-set-key 没有像 setq 那么方便的 list 处理方式, 自己写一个 set-key-bindings
